@@ -98,8 +98,8 @@ public class Test : MonoBehaviour
     {
         Vector3 direction = new Vector3 (_moveInput.x, 0 , _moveInput.y); 
 
-        _animator.SetFloat("Vertical", direction.magnitude, 0.2f, Time.deltaTime);
-        _animator.SetFloat("Horizontal", 0);
+        _animator.SetFloat("Vertical", direction.z, 0.2f, Time.deltaTime);
+        _animator.SetFloat("Horizontal", direction.x, 0.2f, Time.deltaTime);
 
         if(direction != Vector3.zero)
         {
