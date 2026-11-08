@@ -495,7 +495,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549854745}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: d002ea753cb431547af340119a756a19, type: 3}
   m_Controller: {fileID: 9100000, guid: 9c265800424198849bdfcd8ec4f0ce2c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -632,7 +632,7 @@ MonoBehaviour:
   _movementSpeed: 10
   _jumpHeight: 2
   _throwForce: 20
-  _smoothTime: 1
+  _smoothTime: 0.2
   _playerGravity: {x: 0, y: 0, z: 0}
   _sensorTransform: {fileID: 1789331136}
   _sensorRadius: 0.5
