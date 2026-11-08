@@ -496,7 +496,7 @@ Animator:
   m_GameObject: {fileID: 549854745}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: babb786bf1ef0f64087bf29eacaf2763, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9c265800424198849bdfcd8ec4f0ce2c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -610,13 +610,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2.26
+  m_Height: 1.84
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.25, z: 0}
+  m_Center: {x: 0, y: 0.09, z: 0}
 --- !u!114 &841812244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,7 +631,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Test
   _movementSpeed: 10
   _jumpHeight: 2
-  _pushForce: 5
   _throwForce: 20
   _smoothTime: 1
   _playerGravity: {x: 0, y: 0, z: 0}
