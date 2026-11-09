@@ -19,6 +19,7 @@ public class Test : MonoBehaviour
     //Inputs
     private InputAction _moveAction;
     private Vector2 _moveInput;
+    private InputAction _aimAction;
     private InputAction _jumpAction;
 
     //Gravity Controll
@@ -42,7 +43,7 @@ public class Test : MonoBehaviour
 
         _moveAction = InputSystem.actions["Move"];
         _jumpAction = InputSystem.actions["Jump"];
-
+        _aimAction = InputSystem.actions["Aim"];
         _cameraTransform = Camera.main.transform;
     }
 
@@ -68,38 +69,23 @@ public class Test : MonoBehaviour
         }
 
         _animator.SetBool("IsJumping", !IsGrounded());
-
-
-        ThirdPersonMovement();  
+        
+        if(_aimAction.IsPressed())
+        {
+            AimMovement();
+        }
+        else
+        {
+            ThirdPersonMovement();  
+        } 
   
     }
-
-    void TopDownMovement()
-    {
-        //Creamos un Vector 3 (moveDirection) y le determinamos que la dirección se verá afectada por la X del moveInput y la Z de este (como se encuentra en la tercera posición (0,0,0), utilizamos la y del input, pero funcionará como eje z), como no queremos poder subir o bajar, no afectará a la y
-        Vector3 moveDirection = new Vector3 (_moveInput.x, 0 , _moveInput.y); 
-
-        if(moveDirection != Vector3.zero)
-        {
-            //creamos un float.función matemática para convertir la dirección en radiales (Atan2) y después a angulos (Rad2Deg) para poder controlar la rotación
-            float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg; 
-
-            //Creamos un float. función matemática para suavizar el giro
-            float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, _smoothTime);
-
-            transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
-
-            //Función nativa para movernos, utiliza el Vector 3 de dirección, junto con la velocidad de movimineto y se multipkica para que se ejecute a la misma velocidad independientemente de los FPS (Time.deltaTime)
-            _characterController.Move(moveDirection * _movementSpeed * Time.deltaTime); 
-        }
-    }
-
     void ThirdPersonMovement()
     {
         Vector3 direction = new Vector3 (_moveInput.x, 0 , _moveInput.y); 
 
-        _animator.SetFloat("Vertical", direction.z, 0.2f, Time.deltaTime);
-        _animator.SetFloat("Horizontal", direction.x, 0.2f, Time.deltaTime);
+        _animator.SetFloat("Vertical", direction.magnitude, 0.2f, Time.deltaTime);
+        _animator.SetFloat("Horizontal", 0);
 
         if(direction != Vector3.zero)
         {
@@ -112,6 +98,25 @@ public class Test : MonoBehaviour
 
             _characterController.Move(moveDirection * _movementSpeed * Time.deltaTime); 
         }
+    }
+
+    void AimMovement()
+    {
+        Vector3 direction = new Vector3 (_moveInput.x, 0 , _moveInput.y);
+
+        _animator.SetFloat("Horizontal", _moveInput.x, 0.2f, Time.deltaTime);
+        _animator.SetFloat("Vertical", _moveInput.y, 0.2f, Time.deltaTime);
+
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _cameraTransform.eulerAngles.y; 
+        float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, _cameraTransform.eulerAngles.y, ref _turnSmoothVelocity, _smoothTime);
+        transform.rotation = Quaternion.Euler(0, smoothAngle, 0); 
+
+        if(direction != Vector3.zero)
+        {
+            Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+
+            _characterController.Move(moveDirection * _movementSpeed * Time.deltaTime); 
+        }    
     }
 
     void Jump()
@@ -143,6 +148,14 @@ public class Test : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(_sensorTransform.position, _sensorRadius);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == 7)
+        {
+            _animator.SetTrigger("IsDead");
+        }
     }
 }
 
