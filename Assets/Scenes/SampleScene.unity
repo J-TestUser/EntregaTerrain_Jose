@@ -1596,8 +1596,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2072910919}
   - component: {fileID: 2072910922}
-  - component: {fileID: 2072910921}
   - component: {fileID: 2072910920}
+  - component: {fileID: 2072910923}
   m_Layer: 0
   m_Name: MiniMapCamera
   m_TagString: Untagged
@@ -1613,8 +1613,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072910918}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 496.57797, y: 983, z: 470}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1664,14 +1664,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!81 &2072910921
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2072910918}
-  m_Enabled: 1
 --- !u!20 &2072910922
 Camera:
   m_ObjectHideFlags: 0
@@ -1705,7 +1697,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 46.8
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1723,6 +1715,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &2072910923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072910918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e78ae9211587f142978758ce1e0d7f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
+  _cameraTarget: {fileID: 841812242}
+  _cameraOffset: {x: 0, y: 300, z: 0}
 --- !u!1 &2131511035
 GameObject:
   m_ObjectHideFlags: 0
@@ -1873,7 +1879,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 60adaab02b61a8b428f7508327d6d275, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
