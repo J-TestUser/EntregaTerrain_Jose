@@ -266,7 +266,7 @@
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
-    "m_Value": 2.0,
+    "m_Value": 1.0,
     "m_FloatType": 0,
     "m_LiteralFloatMode": false,
     "m_RangeValues": {
@@ -432,9 +432,9 @@
     "m_PerRendererData": false,
     "m_customAttributes": [],
     "m_Value": {
-        "r": 0.23584890365600587,
-        "g": 0.6593948006629944,
-        "b": 1.0,
+        "r": 0.04405481740832329,
+        "g": 0.6226415038108826,
+        "b": 0.6226415038108826,
         "a": 1.0
     },
     "isMainColor": false,
@@ -624,7 +624,7 @@
     "m_ShaderOutputName": "CellDensity",
     "m_StageCapability": 3,
     "m_CustomBinding": "",
-    "m_Value": 5.0,
+    "m_Value": 12.0,
     "m_DefaultValue": 5.0,
     "m_Labels": [],
     "m_LiteralMode": false
@@ -691,9 +691,9 @@
     "m_PerRendererData": false,
     "m_customAttributes": [],
     "m_Value": {
-        "r": 0.09879982471466065,
-        "g": 0.0,
-        "b": 1.0,
+        "r": 0.0,
+        "g": 0.5,
+        "b": 0.4900020658969879,
         "a": 1.0
     },
     "isMainColor": false,
