@@ -12,7 +12,12 @@ public class CameraFollow : MonoBehaviour
         {
             Vector3 desiredPosition = _cameraTarget.position + _cameraOffset;
 
-            transform.position = desiredPosition;   
+            transform.position = desiredPosition;  
+
+            Vector3 desiredRotation = transform.eulerAngles;
+            desiredRotation.y = _cameraTarget.eulerAngles.y;
+
+            transform.eulerAngles = desiredRotation;
         }
     }
 }
