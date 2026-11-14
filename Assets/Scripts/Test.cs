@@ -7,7 +7,7 @@ public class Test : MonoBehaviour
     [SerializeField] private float _movementSpeed = 10;
     [SerializeField] private float _jumpHeight = 2;
     [SerializeField] private float _throwForce = 20;
-    
+    private bool _isDead = false;
     //Specific Variables
     private float _turnSmoothVelocity = 10;
     [SerializeField] private float _smoothTime = 1; //Valor entre 0 (rota instantaneo ) y 1 (rota muy lento)
@@ -82,6 +82,10 @@ public class Test : MonoBehaviour
     }
     void ThirdPersonMovement()
     {
+        if(_isDead)
+        {
+            return;
+        }
         Vector3 direction = new Vector3 (_moveInput.x, 0 , _moveInput.y); 
 
         _animator.SetFloat("Vertical", direction.magnitude, 0.2f, Time.deltaTime);
@@ -102,6 +106,10 @@ public class Test : MonoBehaviour
 
     void AimMovement()
     {
+        if(_isDead)
+        {
+            return;
+        }
         Vector3 direction = new Vector3 (_moveInput.x, 0 , _moveInput.y);
 
         _animator.SetFloat("Horizontal", _moveInput.x, 0.2f, Time.deltaTime);
@@ -155,7 +163,14 @@ public class Test : MonoBehaviour
         if(other.gameObject.layer == 7)
         {
             _animator.SetTrigger("IsDead");
+            IsDead();
         }
+    }
+
+    void IsDead()
+    {
+        _isDead = true;
+        _moveInput = Vector2.zero;
     }
 }
 

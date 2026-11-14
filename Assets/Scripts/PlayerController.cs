@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     //General Variables
     [SerializeField] private float _movementSpeed = 10;
     [SerializeField] private float _jumpHeight = 2;
+    private bool _isDead = false;
 
     //Specific Variables
     private float _turnSmoothVelocity = 10;
@@ -66,6 +67,8 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
+        _animator.SetBool("IsJumping", !IsGrounded());
+        
         if(_aimAction.IsPressed())
         {
             AimMovement();
@@ -78,6 +81,10 @@ public class PlayerController : MonoBehaviour
 
     void ThirdPersonMovement()
     {
+        if(_isDead)
+        {
+            return;
+        }
         Vector3 direction = new Vector3 (_moveInput.x, 0, _moveInput.y);
 
         _animator.SetFloat("Vertical", direction.magnitude, 0.2f, Time.deltaTime);
@@ -85,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
         if(direction != Vector3.zero)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _cameraTransform.eulerAngles.x;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _cameraTransform.eulerAngles.y;
             float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, _smoothTime);
             transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
 
@@ -98,12 +105,16 @@ public class PlayerController : MonoBehaviour
 
     void AimMovement()
     {
+        if(_isDead)
+        {
+            return;
+        }
         Vector3 direction = new Vector3 (_moveInput.x, 0, _moveInput.y);
 
         _animator.SetFloat("Vertical", _moveInput.y, 0.2f, Time.deltaTime);
         _animator.SetFloat("Horizontal", _moveInput.x, 0.2f, Time.deltaTime);
 
-        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _cameraTransform.eulerAngles.x;
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _cameraTransform.eulerAngles.y;
         float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, _cameraTransform.eulerAngles.y, ref _turnSmoothVelocity, _smoothTime);
         transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
 
@@ -117,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        _playerGravity.y = Mathf.Sqrt(_jumpHeight *2 * _gravity);
+        _playerGravity.y = Mathf.Sqrt(_jumpHeight *-2 * _gravity);
     }
 
     void Gravity()
@@ -137,7 +148,7 @@ public class PlayerController : MonoBehaviour
 
     bool IsGrounded()
     {
-        return Physics.CheckSphere(_sensorTransform.position, _sensorRadius);
+        return Physics.CheckSphere(_sensorTransform.position, _sensorRadius, _groundLayer);
     }
 
     void OnDrawGizmos()
@@ -151,6 +162,13 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.layer == 7)
         {
             _animator.SetTrigger("IsDead");
+            IsDead();
         }
+    }
+
+    void IsDead()
+    {
+        _isDead = true;
+        _moveInput = Vector2.zero;
     }
 }

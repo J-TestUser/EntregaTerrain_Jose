@@ -853,7 +853,6 @@ GameObject:
   m_Component:
   - component: {fileID: 841812242}
   - component: {fileID: 841812243}
-  - component: {fileID: 841812244}
   - component: {fileID: 841812245}
   m_Layer: 0
   m_Name: Player
@@ -904,29 +903,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.15, z: 0}
---- !u!114 &841812244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 841812238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbd8c47bd6ca0a4589a5e5b380c48df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Test
-  _movementSpeed: 10
-  _jumpHeight: 2
-  _throwForce: 20
-  _smoothTime: 0.2
-  _playerGravity: {x: 0, y: 0, z: 0}
-  _sensorTransform: {fileID: 1789331136}
-  _sensorRadius: 0.5
-  _groundlayer:
-    serializedVersion: 2
-    m_Bits: 64
+  m_Center: {x: 0, y: 0.23, z: 0}
 --- !u!114 &841812245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,7 +911,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841812238}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a84abc1b30f99d949b51b16ba6a4b4a1, type: 3}
   m_Name: 
@@ -1328,8 +1305,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10.01, y: 0.2, z: 9.999999}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 10.0099945, y: 0.12981127, z: 9.999999}
+  m_Center: {x: 0, y: -0.035094302, z: 0}
 --- !u!64 &1754364365
 MeshCollider:
   m_ObjectHideFlags: 0
